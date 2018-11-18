@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js example</title>
+    <script src="../p5/addons/p5.dom.min.js"></script>
+    <script src="../p5/addons/p5.dom.js"></script>
+    <script src="../p5/p5.js"></script>
+    左右运动幅度：<select name="select0" id="select0" >
+        <option value="0"></option>
+        <option value="1">超级小</option>
+        <option value="2">小</option>
+        <option value="3">正常</option>
+        <option value="4">大</option>
+        <option value="5">超级大</option>
+        </select>
+
+    上下运动幅度：<select name="select1" id="select1">
+        <option value="0"></option>
+        <option value="1">超小</option>
+        <option value="2">小</option>
+        <option value="3">正常</option>
+        <option value="4">大</option>
+        <option value="5">超级大</option>
+    </select>
+
+    摆动速度:<select name="select2" id="select2">
+        <option value="1">超大</option>
+        <option value="2">大</option>
+        <option value="3">正常</option>
+        <option value="4">小</option>
+        <option value="5">超级小</option>
+    </select>
+    <input type="button" name="btn" id="submit" value="确认" />
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+    html,body{
+      height:100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    canvas{
+      display:block;
+      background:#D6F8FF;
+    }</style>
+  </head>
+  <body>
+    <script> 
+      var Vx=3;
+      var Vy=3;
+      var x=0;
+      var y=0;
+      var i=0;
+      var A=0;
+      var B=1;
+      var C=3;//变手的频率
+      
+      var submit=document.getElementById('submit');
+      submit.onclick=function(){
+        var dom=document.getElementById('select0').value;
+        var dom1=document.getElementById('select1').value;
+        var dom2=document.getElementById('select2').value;
+        a=Number(dom);
+        b=Number(dom1);
+        c=Number(dom2);
+        Vx=a;
+        Vy=b;
+        C=c;
+        console.log(Vx);
+        console.log(Vy);
+        console.log(C);
+      }
+     
+
+      //左手
+      function lefthand(x,y,i){
+         //画手手
+        if (i==0||i==9)
+        {
+          fill(0);
+          var a =line(218+x,350+y,180+x,425+y);
+          fill(255);
+          var b=ellipse(175+x,435+y,25,25);
+        }
+        
+        if (i==1||i==8)
+        {
+          fill(0);
+          var a =line(218+x,350+y,199+x,440+y);
+          fill(255);
+          var b=ellipse(194+x,450+y,25,25);
+        }
+        if(i==2||i==7)
+        {
+          fill(0);
+          var a =line(218+x,350+y,218+x,450+y);
+          fill(255);
+          var b=ellipse(218+x,459+y,25,25);
+        }
+        if (i==3||i==6)
+        {
+          fill(0);
+          var a =line(218+x,350+y,237+x,440+y);
+          fill(255);
+          var b=ellipse(237+x,450+y,25,25);
+        }
+        if (i==4||i==5)
+        {
+          fill(0);
+          var a =line(218+x,350+y,256+x,425+y);
+          fill(255);
+          var b=ellipse(261+x,435+y,25,25);
+        }
+        
+      }
+
+
+      //右手
+      function righthand(x,y,i){
+        if (i==0||i==9)
+        {
+          fill(0);
+          var a=line(382+x,350+y,420+x,425+y);
+          fill(255);
+          var b=ellipse(425+x,435+y,25,25);
+        }
+        if (i==1||i==8)
+        {
+          fill(0);
+          var a=line(382+x,350+y,401+x,440+y);
+          fill(255);
+          var b=ellipse(406+x,450+y,25,25);
+        }
+        if (i==2||i==7)
+        {
+          fill(0);
+          var a=line(382+x,350+y,382+x,450+y);
+          fill(255);
+          var b=ellipse(382+x,459+y,25,25);
+        }
+        if (i==3||i==6)
+        {
+          fill(0);
+          var a=line(382+x,350+y,363+x,440+y);
+          fill(255);
+          var b=ellipse(363+x,450+y,25,25);
+        }
+        if (i==4||i==5)
+        {
+          fill(0);
+          var a=line(382+x,350+y,344+x,425+y);
+          fill(255);
+          var b=ellipse(339+x,435+y,25,25);
+        }
+      }
+
+      //左腿
+      function leftleg(x,y,i){
+        if (i==0||i==9)
+        {
+        fill(0);
+        var a=line(260+x,512+y,274+x,580+y);
+        fill(255);
+        var b=ellipse(275+x,590+y,30,30);
+        }
+        if (i==1||i==8)
+        {
+          fill(0);
+          var a=line(260+x,512+y,267+x,590+y);
+          fill(255);
+          var b=ellipse(267.5+x,595+y,30,30);
+        }
+        if (i==2||i==7)
+        {
+          fill(0);
+          var a=line(260+x,512+y,260+x,581+y);
+          fill(255);
+          var b=ellipse(260+x,591+y,30,30);
+        }
+        if (i==3||i==6)
+        {
+          fill(0);
+          var a=line(260+x,512+y,254+x,590+y);
+          fill(255);
+          var b=ellipse(252.5+x,595+y,30,30);
+        }
+        if (i==4||i==5)
+        {
+          fill(0);
+          var a=line(260+x,512+y,246+x,580+y);
+          fill(255);
+          var b=ellipse(246+x,590+y,30,30);
+        }
+        
+      }
+
+      //右腿
+      function rightleg(x,y,i){
+        if (i==0||i==9)
+        {
+          fill(0);
+          var a=line(340+x,512+y,326+x,580+y);
+          fill(255);
+          var b=ellipse(325+x,590+y,30,30);
+        }
+        
+        if (i==1||i==8)
+        {
+          fill(0);
+          var a=line(340+x,512+y,333+x,590+y);
+          fill(255);
+          var b=ellipse(332.5+x,595+y,30,30);
+        }
+        if (i==2||i==7)
+        {
+          fill(0);
+          var a=line(340+x,512+y,340+x,581+y);
+          fill(255);
+          var b=ellipse(340+x,591+y,30,30);
+        }
+        if (i==3||i==6)
+        {
+          fill(0);
+          var a=line(340+x,512+y,347+x,590+y);
+          fill(255);
+          var b=ellipse(347.5+x,595+y,30,30);
+        }
+        if (i==4||i==5)
+        {
+          fill(0);
+          var a=line(340+x,512+y,354+x,580+y);
+          fill(255);
+          var b=ellipse(355+x,590+y,30,30);
+        }
+      }
+
+      function paint(x,y){
+        
+        if (Vx>0)
+        {
+          righthand(x,y,i);
+          fill(255);
+          //画身体
+          ellipse(300+x,400+y,180,250);
+          lefthand(x,y,i);
+        }
+        else
+        {
+          lefthand(x,y,i);
+          fill(255);
+          //画身体
+          ellipse(300+x,400+y,180,250);
+          righthand(x,y,i);
+        }
+        
+
+        
+        
+
+
+        fill(255);// 填充白色
+        // 1 画脸
+        strokeWeight(2);
+        ellipse(300+x,220+y,200,200);// 圆圈
+
+        // 2 左眼
+        fill(0);
+        ellipse(260+x,200+y,50,50);// 另一个圆圈
+
+        // 3 右眼
+        ellipse(340+x,200+y,50,50);
+      
+        fill(255);// 填充黑色
+        // 5 左眼珠
+        ellipse(260+x,200+y,10,20);
+
+        // 6 右眼珠
+        ellipse(340+x,200+y,10,20);
+        fill(0);
+        ellipse(260+x,200+y,8,8);
+        ellipse(340+x,200+y,8,8);
+
+        //鼻子
+        ellipse(300+x,230+y,10,10);
+        line(300+x,230+y,300+x,260+y);
+        noFill();
+        arc(300+x,260+y,30,15,TWO_PI, PI);
+
+        //耳朵
+        fill(0);
+        ellipse(220+x,120+y,60,60);
+        ellipse(380+x,120+y,60,60);
+
+        
+        leftleg(x,y,i);
+        rightleg(x,y,i);
+        
+      }
+      function setup() {
+        // 创建画布，宽度640像素，高度480像素
+        // 画布的坐标系统为，左上角坐标为（0，0），
+        // x方向水平向右，y方向垂直向下，单位像素
+        createCanvas(window.innerWidth,window.innerHeight);
+        // frameRate(1);
+        }
+        
+        // 函数draw()：作画阶段
+        function draw() {
+          background(214,248,255);
+          x+=Vx;
+          y+=Vy;
+          B+=1;
+          if (B%C==0)
+          A++;
+          i=A%10;
+         paint(x,y);
+          if (x>innerWidth-420||x<-180)
+            Vx=-Vx;
+          if(y>innerHeight-620||y<-80)
+            Vy=-Vy;
+          
+        }
+      </script>
+      
+  </body>
+</html>
